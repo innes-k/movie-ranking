@@ -11,11 +11,11 @@ const options = {
 let vote_average, title, overview, poster_path, card_id;
 
 // fetch로 api 가져오기 
-    // < 포함된 사항 >
-    // 1. const, let
-    // 2. 화살표 함수
-    // 3. forEach, filter
-    // 4. getElementById, window.location.href
+// < 포함된 사항 >
+// 1. const, let
+// 2. 화살표 함수
+// 3. forEach, filter
+// 4. getElementById, window.location.href
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
   .then(response => response.json())
 
@@ -113,6 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // 페이지 로딩 시에 입력칸에 커서를 위치시킴
+  window.onload = function () {
+    document.querySelector('.input').focus();
+  };
+
   // 검색 버튼과 엔터 키에 대한 공통 검색 로직
   function performSearch() {
     // 입력된 알파벳을 가져오기
@@ -154,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!hasSearchResults) {
       alert('검색 결과가 없습니다.');
       window.location.reload();
+      return;
     }
   }
 });
