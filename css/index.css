@@ -14,10 +14,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 15px;
 
     background-color: rgb(252, 252, 190);
 }
-
-.row {
-    
+/* 
+.cards-main > .row {margin: auto;} */
+.cards-main {
+    width: 1000px;
+    margin: auto;
+    padding-top: 20px;
 }
