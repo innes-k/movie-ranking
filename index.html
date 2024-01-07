@@ -12,24 +12,25 @@
 
 <body>
   <!-- 메인 헤더 -->
-  <div class="header">
-    <p class="logo">내배캠 최고 평점 영화 컬렉션</p>
-  </div>
-  <!-- 검색 라인 -->
-  <div class="search">
-    <p>영화 검색 :
-      <input class="input">
-      <button type="button">검색</button>
-      <button type="button" id="main_btn">메인으로</button>
-    </p>
-    <hr>
-  </div>
+  <nav class="header">
+    <div class="logo">
+      <img src="./images/logo.png" id="main_btn">
+    </div>
+    <div class="search">
+      <p>영화 검색 :
+        <input class="input">
+        <button type="button">검색</button>
+        <!-- <button type="button" id="main_btn">메인으로</button>
+      </p> -->
+
+    </div>
+  </nav>
   <!-- 카드 나열 -->
   <div class="cards-main">
     <div id="cardContainer" class="cards-array"></div>
     <script src="./js/script.js"></script>
   </div>
-  </div>
+
 </body>
 
 </html>

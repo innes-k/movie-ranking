@@ -1,34 +1,41 @@
 /* 메인 헤더 */
 .header {
-    background-color: pink;
+    background-color: black;
     width: 100%;
-    height: 100px;
+    height: 80px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    padding-right: 20px;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
 
-    font-size: 40px;
+    color: white;
+    position: fixed;
+    z-index: 99999;
 }
 
-/* 검색 라인 */
-.search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 15px;
+/* 메인 로고 */
+.logo > img {
+    width: 400px;
+    padding-left: 30px;
 
-    background-color: rgb(252, 252, 190);
+    cursor: pointer;
+}
+.logo > img:hover {
+    width: 450px;
 }
 
 /* 카드 전체영역 */
 .cards-main {
-    width: 2000px;
+    width: 100%;
     margin: auto;
-    padding-top: 20px;
+    padding-top: 100px;
     display: flex;
     justify-content: center;
-    
+
+    background-color: rgb(37, 37, 37);
 }
 
 body .cards-array {
@@ -40,30 +47,33 @@ body .cards-array {
 
 body .card {
     border: 1px solid #ccc;
+    border-radius: 10px;
     padding: 10px;
     margin: 10px;
-    width: 300px;
-    height: 850px;
+    width: 250px;
+    height: 500px;
 
     cursor: pointer;
 
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(37, 37, 37);
+    color: white;
   }
   
 
 body .card img {
-    width: 260px;
+    width: 230px;
     height: auto;
     object-fit: cover;
-    margin: 7px auto 7px auto;
+    margin: 0px auto 7px auto;
     border-radius: 10px;
 
     display: flex;
 }
 
 .card:hover {
-    background-color: pink;
+    background-color: rgb(192, 192, 192);
+    width: 340px;
+    height: 850px;
 }
 
 

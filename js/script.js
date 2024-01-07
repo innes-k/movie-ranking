@@ -275,6 +275,13 @@ function createMovieCard(movie) {
   // 영화 제목을 카드에 추가
   card.appendChild(titleElement);
 
+  // 영화 평점 엘리먼트 생성
+  const voteAverageElement = document.createElement('p');
+  // 영화 평점 설정
+  voteAverageElement.textContent = '🍿 : ' + movie.vote_average; // 영화 평점: vote_average
+  // 영화 평점을 카드에 추가
+  card.appendChild(voteAverageElement);
+
   // 영화 내용 엘리먼트 생성
   const overviewElement = document.createElement('p');
   // 영화 내용 설정
@@ -282,12 +289,7 @@ function createMovieCard(movie) {
   // 영화 내용을 카드에 추가
   card.appendChild(overviewElement);
 
-  // 영화 평점 엘리먼트 생성
-  const voteAverageElement = document.createElement('p');
-  // 영화 평점 설정
-  voteAverageElement.textContent = '평점: ' + movie.vote_average; // 영화 평점: vote_average
-  // 영화 평점을 카드에 추가
-  card.appendChild(voteAverageElement);
+  
 
   // 카드가 추가될 부모 엘리먼트를 가져옴
   const cardContainer = document.getElementById('cardContainer');
