@@ -18,13 +18,13 @@
 
 /* 메인 로고 */
 .logo > img {
-    width: 400px;
+    width: 450px;
     padding-left: 30px;
 
     cursor: pointer;
 }
 .logo > img:hover {
-    width: 450px;
+    width: 500px;
 }
 
 /* 카드 전체영역 */
@@ -32,6 +32,7 @@
     width: 100%;
     margin: auto;
     padding-top: 100px;
+    padding-bottom: 70px;
     display: flex;
     justify-content: center;
 
@@ -51,15 +52,22 @@ body .card {
     padding: 10px;
     margin: 10px;
     width: 250px;
-    height: 500px;
+    height: 530px;
 
     cursor: pointer;
 
     background-color: rgb(37, 37, 37);
     color: white;
-  }
-  
 
+    transition: height,width 0.3s linear; /* 애니메이션을 부드럽게 처리 */
+    overflow: hidden; /* 넘치는 부분 숨김 처리 */
+    position: relative; /* 상대적 위치 지정 */
+  }
+
+  .card:hover p {
+    display: block;
+}
+  
 body .card img {
     width: 230px;
     height: auto;
@@ -73,7 +81,7 @@ body .card img {
 .card:hover {
     background-color: rgb(192, 192, 192);
     width: 340px;
-    height: 850px;
+    height: auto;
 }
 
 
