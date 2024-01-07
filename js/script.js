@@ -10,11 +10,13 @@ const options = {
 // fetch 밖에서 미리 let 변수 선언 (fetch 안, 밖에서 쓸 수 있도록)
 let vote_average, title, overview, poster_path, card_id;
 
+
+
 // fetch로 api 가져오기 
 // < 포함된 사항 >
 // 1. const, let
 // 2. 화살표 함수
-// 3. forEach, filter
+// 3. forEach
 // 4. getElementById, window.location.href
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
   .then(response => response.json())
@@ -35,19 +37,21 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
       createMovieCard(movie);
     });
 
-    // filter를 사용한 검색 함수
+    // 검색버튼에 click 이벤트, 검색 실행 함수
     document.querySelector('button').addEventListener('click', performSearch);
   })
+
   .catch(error => {
     console.error('Error fetching movie data:', error);
   });
 
-// createMovieCard 함수 수정: 반환값으로 카드를 반환하지 않음
+
+// -------- 카드 만들기 시작 --------
 function createMovieCard(movie) {
   const card = document.createElement('div');
   card.className = 'card';
 
-  // 여기에 click 이벤트를 추가합니다.
+  // 카드 클릭 시 '영화 id' alert 생성
   card.addEventListener('click', () => {
     alert('영화 id: ' + movie.id);
   });
@@ -81,14 +85,34 @@ function createMovieCard(movie) {
   card.appendChild(overviewElement);
 
 
-
   // 카드가 추가될 부모 엘리먼트를 가져옴
   const cardContainer = document.getElementById('cardContainer');
   // 카드를 부모 엘리먼트에 추가
   cardContainer.appendChild(card);
 }
 
-// 검색기능 시작
+
+
+// '홈'버튼 클릭 시 새로고침 이벤트 처리
+document.getElementById('main_btn').addEventListener('click', function () {
+  window.location.href = './index.html';
+});
+
+// logo 이미지 클릭 시 스크롤 최상단으로 이동
+const topBtn = document.querySelector("#scrollTopButton");
+
+topBtn.onclick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// 페이지 로딩 시에 입력칸에 커서를 위치시킴
+window.onload = function () {
+  document.querySelector('.input').focus();
+};
+
+
+
+// -------- 검색 버튼, 엔터 키 click 이벤트 --------
 document.addEventListener('DOMContentLoaded', () => {
   // 검색 버튼을 클릭했을 때 이벤트 처리
   document.querySelector('button').addEventListener('click', performSearch);
@@ -100,49 +124,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // '홈'버튼 클릭 시 새로고침 이벤트 처리
-  document.getElementById('main_btn').addEventListener('click', function () {
-    window.location.href = './index.html';
-  });
 
-  // logo 이미지 클릭 시 스크롤 최상단으로 이동
-  const topBtn = document.querySelector("#scrollTopButton");
-
-  // 버튼 클릭 시 맨 위로 이동
-  topBtn.onclick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  // 페이지 로딩 시에 입력칸에 커서를 위치시킴
-  window.onload = function () {
-    document.querySelector('.input').focus();
-  };
-
-  // 검색 버튼과 엔터 키에 대한 공통 검색 로직
+  // -------- 검색 버튼과 엔터 키에 대한 공통 검색 로직 --------
   function performSearch() {
+    
     // 입력된 알파벳을 가져오기
     const searchKeyword = document.querySelector('.input').value.toLowerCase();
 
-    // 검색어가 없는 경우 알림창 띄우기
-    // if (!searchKeyword.trim()) {
-    //   alert('검색어를 입력해주세요.');
-    //   return;
-    // }
-    // 검색어가 없는 경우 간단한 경고창 띄우기
+    // 초기 상태에서 hasSearchResults를 '' 설정
+    let hasSearchResults = '';
+
+
+
+    // 검색어가 없는 경우 alert 띄우기
     if (!searchKeyword.trim()) {
       alert('검색어를 입력해주세요.');
       document.querySelector('.input').focus(); // 입력칸으로 커서 이동
       return;
     }
 
-    // 초기 상태에서 hasSearchResults를 '' 설정
-    let hasSearchResults = '';
-
+    
     // 카드를 담고 있는 부모 엘리먼트
     const cardContainer = document.getElementById('cardContainer');
 
     // 모든 카드 엘리먼트를 가져옴
     const cards = cardContainer.querySelectorAll('.card');
+
 
     // 각 카드에 대해 검색 키워드가 포함된지 확인하고 보이거나 감추기
     cards.forEach(card => {
@@ -155,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    
     // 검색 결과가 없는 경우 알림창 띄우기
     if (!hasSearchResults) {
       alert('검색 결과가 없습니다.');
