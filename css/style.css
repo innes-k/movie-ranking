@@ -23,7 +23,7 @@
 
 /* 카드 전체영역 */
 .cards-main {
-    width: 1000px;
+    width: 2000px;
     margin: auto;
     padding-top: 20px;
     display: flex;
@@ -31,13 +31,14 @@
     
 }
 
-.card-array {
+body .cards-array {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.card {
+
+body .card {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px;
@@ -45,12 +46,20 @@
     height: 850px;
 
     cursor: pointer;
-}
 
-.card img {
-    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+  }
+  
+
+body .card img {
+    width: 260px;
     height: auto;
     object-fit: cover;
+    margin: 7px auto 7px auto;
+    border-radius: 10px;
+
+    display: flex;
 }
 
 .card:hover {
