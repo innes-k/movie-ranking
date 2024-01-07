@@ -7,11 +7,15 @@ const options = {
   }
 };
 
-// fetch 밖에서 미리 let 변수 선언 (fetch 안,밖에서 쓸 수 있도록)
+// fetch 밖에서 미리 let 변수 선언 (fetch 안, 밖에서 쓸 수 있도록)
 let vote_average, title, overview, poster_path, card_id;
 
 // fetch로 api 가져오기 
-// -> const, let/ 화살표 함수/ forEach, filter/ getElementById, window.location.href 포함
+    // < 포함된 사항 >
+    // 1. const, let
+    // 2. 화살표 함수
+    // 3. forEach, filter
+    // 4. getElementById, window.location.href
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
   .then(response => response.json())
 
@@ -126,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // 초기 상태에서 hasSearchResults를 '' 설정
+    let hasSearchResults = '';
+
     // 카드를 담고 있는 부모 엘리먼트
     const cardContainer = document.getElementById('cardContainer');
 
@@ -137,10 +144,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = card.querySelector('h2').textContent.toLowerCase();
       if (title.includes(searchKeyword)) {
         card.style.display = 'block'; // 해당 키워드가 포함된 경우 표시
+        hasSearchResults = true;
       } else {
         card.style.display = 'none'; // 해당 키워드가 포함되지 않은 경우 숨김
       }
     });
+
+    // 검색 결과가 없는 경우 알림창 띄우기
+    if (!hasSearchResults) {
+      alert('검색 결과가 없습니다.');
+      window.location.reload();
+    }
   }
 });
 
