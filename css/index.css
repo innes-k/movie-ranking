@@ -1,3 +1,4 @@
+/* 메인 헤더 */
 .header {
     background-color: pink;
     width: 100%;
@@ -9,7 +10,7 @@
 
     font-size: 40px;
 }
-
+/* 검색 라인 */
 .search {
     display: flex;
     justify-content: center;
@@ -18,8 +19,7 @@
 
     background-color: rgb(252, 252, 190);
 }
-/* 
-.cards-main > .row {margin: auto;} */
+/* 카드 전체영역 */
 .cards-main {
     width: 1000px;
     margin: auto;
