@@ -1,4 +1,4 @@
-// // API 원본 중 일부(권한부여)
+// API get, Authorization
 const options = {
   method: 'GET',
   headers: {
@@ -7,12 +7,14 @@ const options = {
   }
 };
 
-// fetch 밖에서 미리 let 변수 선언
+// fetch 밖에서 미리 let 변수 선언 (fetch 안,밖에서 쓸 수 있도록)
 let vote_average, title, overview, poster_path, card_id;
 
-// fetch로 api 가져오기 - forEach, filter 포함하도록 수정
+// fetch로 api 가져오기 
+// -> const, let/ 화살표 함수/ forEach, filter/ getElementById, window.location.href 포함
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
   .then(response => response.json())
+
   // fetch로 가져온 api에서 data 내 필요한 value 추출
   .then(data => {
     console.log(data);
@@ -94,19 +96,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // logo 이미지 버튼, '홈'버튼 클릭 시 이벤트 처리
-  const mainBtns = document.querySelectorAll('.main-btn');
-  mainBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      location.reload(); // 현재 위치를 새로고침
-    });
+  // '홈'버튼 클릭 시 새로고침 이벤트 처리
+  document.getElementById('main_btn').addEventListener('click', function () {
+    window.location.href = './index.html';
   });
 
+  // logo 이미지 클릭 시 스크롤 최상단으로 이동
+  const topBtn = document.querySelector("#scrollTopButton");
+
+  // 버튼 클릭 시 맨 위로 이동
+  topBtn.onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   // 검색 버튼과 엔터 키에 대한 공통 검색 로직
   function performSearch() {
     // 입력된 알파벳을 가져오기
     const searchKeyword = document.querySelector('.input').value.toLowerCase();
+
+    // 검색어가 없는 경우 알림창 띄우기
+    // if (!searchKeyword.trim()) {
+    //   alert('검색어를 입력해주세요.');
+    //   return;
+    // }
+    // 검색어가 없는 경우 간단한 경고창 띄우기
+    if (!searchKeyword.trim()) {
+      alert('검색어를 입력해주세요.');
+      document.querySelector('.input').focus(); // 입력칸으로 커서 이동
+      return;
+    }
 
     // 카드를 담고 있는 부모 엘리먼트
     const cardContainer = document.getElementById('cardContainer');
@@ -125,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
 
 
 
@@ -215,10 +234,18 @@ document.addEventListener('DOMContentLoaded', () => {
 //     }
 //   });
 
-//   // '메인으로' 버튼 클릭 시 이벤트 처리
+//   // '메인으로' 버튼 클릭 시 새로고침 이벤트 처리
 //   document.getElementById('main_btn').addEventListener('click', function () {
 //     location.reload(); // 현재 위치를 새로고침
 //   });
+
+///// (참고 ㅡ 새로고침 이벤트를 class로 여러 곳에 같은 동작 주고싶으면 - querySelectorAll, forEach)
+// const mainBtns = document.querySelectorAll('.main-btn');
+// mainBtns.forEach(btn => {
+//   btn.addEventListener('click', () => {
+//     location.reload(); // 현재 위치를 새로고침
+//   });
+// });
 
 //   // 검색 버튼과 엔터 키에 대한 공통 검색 로직
 //   function performSearch() {
