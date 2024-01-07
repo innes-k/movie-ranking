@@ -10,6 +10,7 @@
 
     font-size: 40px;
 }
+
 /* 검색 라인 */
 .search {
     display: flex;
@@ -19,9 +20,41 @@
 
     background-color: rgb(252, 252, 190);
 }
+
 /* 카드 전체영역 */
 .cards-main {
     width: 1000px;
     margin: auto;
     padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    
 }
+
+.card-array {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    height: 850px;
+
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card:hover {
+    background-color: pink;
+}
+
+
