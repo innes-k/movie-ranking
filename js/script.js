@@ -1,32 +1,34 @@
 // API get, Authorization
 const options = {
-  method: 'GET',
+  method: "GET",
   headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NTM3NDEzNzIzMDU4OGQ2YTQ1MmQ3MzZhZjhlMzA4NCIsInN1YiI6IjY1OTkyOTI3MGQxMWYyMDBlZWRkMzJhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ldX3pBFyoKt2iJBxyIkHrL73HNEYjA7rpBwGeOBYnNc'
-  }
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NTM3NDEzNzIzMDU4OGQ2YTQ1MmQ3MzZhZjhlMzA4NCIsInN1YiI6IjY1OTkyOTI3MGQxMWYyMDBlZWRkMzJhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ldX3pBFyoKt2iJBxyIkHrL73HNEYjA7rpBwGeOBYnNc",
+  },
 };
 
 // fetch 밖에서 미리 let 변수 선언 (fetch 안, 밖에서 쓸 수 있도록)
 let vote_average, title, overview, poster_path, card_id;
 
-
-
-// fetch로 api 가져오기 
-// < 포함된 사항 >
+// fetch로 api 가져오기
+//  < 포함된 사항 >
 // 1. const, let
 // 2. 화살표 함수
 // 3. forEach
 // 4. getElementById, window.location.href
-fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-  .then(response => response.json())
+fetch(
+  "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+  options
+)
+  .then((response) => response.json())
 
   // fetch로 가져온 api에서 data 내 필요한 value 추출
-  .then(data => {
+  .then((data) => {
     console.log(data);
 
     // forEach를 사용하여 카드 생성
-    data.results.forEach(movie => {
+    data.results.forEach((movie) => {
       vote_average = movie.vote_average;
       title = movie.title;
       overview = movie.overview;
@@ -38,64 +40,60 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
     });
 
     // 검색버튼에 click 이벤트, 검색 실행 함수
-    document.querySelector('button').addEventListener('click', performSearch);
+    document.querySelector("button").addEventListener("click", performSearch);
   })
 
-  .catch(error => {
-    console.error('Error fetching movie data:', error);
+  .catch((error) => {
+    console.error("Error fetching movie data:", error);
   });
-
 
 // -------- 카드 만들기 시작 --------
 function createMovieCard(movie) {
-  const card = document.createElement('div');
-  card.className = 'card';
+  const card = document.createElement("div");
+  card.className = "card";
 
   // 카드 클릭 시 '영화 id' alert 생성
-  card.addEventListener('click', () => {
-    alert('영화 id: ' + movie.id);
+  card.addEventListener("click", () => {
+    alert("영화 id: " + movie.id);
   });
 
   // 이미지 엘리먼트 생성
-  const image = document.createElement('img');
+  const image = document.createElement("img");
   // 이미지 소스 설정
-  image.src = 'https://image.tmdb.org/t/p/w200' + movie.poster_path; // 이미지 주소: poster_path
+  image.src = "https://image.tmdb.org/t/p/w200" + movie.poster_path; // 이미지 주소: poster_path
   // 이미지를 카드에 추가
   card.appendChild(image);
 
   // 영화 제목 엘리먼트 생성
-  const titleElement = document.createElement('h2');
+  const titleElement = document.createElement("h2");
   // 영화 제목 설정
   titleElement.textContent = movie.title; // 영화 제목: title
   // 영화 제목을 카드에 추가
   card.appendChild(titleElement);
 
   // 영화 평점 엘리먼트 생성
-  const voteAverageElement = document.createElement('p');
+  const voteAverageElement = document.createElement("p");
   // 영화 평점 설정
-  voteAverageElement.textContent = '🍿 : ' + movie.vote_average; // 영화 평점: vote_average
+  voteAverageElement.textContent = "🍿 : " + movie.vote_average; // 영화 평점: vote_average
   // 영화 평점을 카드에 추가
   card.appendChild(voteAverageElement);
 
   // 영화 내용 엘리먼트 생성
-  const overviewElement = document.createElement('p');
+  const overviewElement = document.createElement("p");
   // 영화 내용 설정
   overviewElement.textContent = movie.overview; // 영화 내용: overview
   // 영화 내용을 카드에 추가
   card.appendChild(overviewElement);
 
-
   // 카드가 추가될 부모 엘리먼트를 가져옴
-  const cardContainer = document.getElementById('cardContainer');
+  const cardContainer = document.getElementById("cardContainer");
   // 카드를 부모 엘리먼트에 추가
   cardContainer.appendChild(card);
 }
 
-
-
 // '홈'버튼 클릭 시 새로고침 이벤트 처리
-document.getElementById('main_btn').addEventListener('click', function () {
-  window.location.href = './index.html';
+document.getElementById("main_btn").addEventListener("click", function () {
+  window.location.href = "./index.html";
 });
 
 // logo 이미지 클릭 시 스크롤 최상단으로 이동
@@ -103,82 +101,65 @@ const topBtn = document.querySelector("#scrollTopButton");
 
 topBtn.onclick = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
-}
+};
 
 // 페이지 로딩 시에 입력칸에 커서를 위치시킴
 window.onload = function () {
-  document.querySelector('.input').focus();
+  document.querySelector(".input").focus();
 };
 
-
-
 // -------- 검색 버튼, 엔터 키 click 이벤트 --------
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // 검색 버튼을 클릭했을 때 이벤트 처리
-  document.querySelector('button').addEventListener('click', performSearch);
+  document.querySelector("button").addEventListener("click", performSearch);
 
   // 엔터 키를 눌렀을 때 이벤트 처리
-  document.querySelector('.input').addEventListener('keydown', event => {
-    if (event.key === 'Enter') {
+  document.querySelector(".input").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
       performSearch();
     }
   });
 
-
   // -------- 검색 버튼과 엔터 키에 대한 공통 검색 로직 --------
   function performSearch() {
-    
     // 입력된 알파벳을 가져오기
-    const searchKeyword = document.querySelector('.input').value.toLowerCase();
+    const searchKeyword = document.querySelector(".input").value.toLowerCase();
 
     // 초기 상태에서 hasSearchResults를 '' 설정
-    let hasSearchResults = '';
-
-
+    let hasSearchResults = "";
 
     // 검색어가 없는 경우 alert 띄우기
     if (!searchKeyword.trim()) {
-      alert('검색어를 입력해주세요.');
-      document.querySelector('.input').focus(); // 입력칸으로 커서 이동
+      alert("검색어를 입력해주세요.");
+      document.querySelector(".input").focus(); // 입력칸으로 커서 이동
       return;
     }
 
-    
     // 카드를 담고 있는 부모 엘리먼트
-    const cardContainer = document.getElementById('cardContainer');
+    const cardContainer = document.getElementById("cardContainer");
 
     // 모든 카드 엘리먼트를 가져옴
-    const cards = cardContainer.querySelectorAll('.card');
-
+    const cards = cardContainer.querySelectorAll(".card");
 
     // 각 카드에 대해 검색 키워드가 포함된지 확인하고 보이거나 감추기
-    cards.forEach(card => {
-      const title = card.querySelector('h2').textContent.toLowerCase();
+    cards.forEach((card) => {
+      const title = card.querySelector("h2").textContent.toLowerCase();
       if (title.includes(searchKeyword)) {
-        card.style.display = 'block'; // 해당 키워드가 포함된 경우 표시
+        card.style.display = "block"; // 해당 키워드가 포함된 경우 표시
         hasSearchResults = true;
       } else {
-        card.style.display = 'none'; // 해당 키워드가 포함되지 않은 경우 숨김
+        card.style.display = "none"; // 해당 키워드가 포함되지 않은 경우 숨김
       }
     });
 
-    
     // 검색 결과가 없는 경우 알림창 띄우기
     if (!hasSearchResults) {
-      alert('검색 결과가 없습니다.');
+      alert("검색 결과가 없습니다.");
       window.location.reload();
       return;
     }
   }
 });
-
-
-
-
-
-
-
-
 
 //// 코드 수정 과정 기록 - 개인적인 공부를 위한 주석
 // (화살표 함수 사용 전)
